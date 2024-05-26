@@ -2,7 +2,7 @@ package com.example.entity;
 
 import java.io.Serializable;
 
-public class category implements Serializable {
+public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer id;
     private String name;
