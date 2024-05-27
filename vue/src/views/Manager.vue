@@ -52,6 +52,8 @@
             </template>
             <el-menu-item index="/admin">管理员信息</el-menu-item>
             <el-menu-item index="/user">用户信息</el-menu-item>
+            <el-menu-item index="/goods">商品信息</el-menu-item>
+
 
           </el-submenu>
         </el-menu>
