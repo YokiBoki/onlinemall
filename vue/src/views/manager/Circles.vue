@@ -41,6 +41,7 @@
     <el-dialog title="圈子" :visible.sync="fromVisible" width="40%" :close-on-click-modal="false" destroy-on-close>
       <el-form :model="form" label-width="100px" style="padding-right: 50px" :rules="rules" ref="formRef">
         <el-form-item label="缩略图" prop="img">
+
           <el-upload
               :action="$baseUrl + '/files/upload'"
               :headers="{ token: user.token }"
@@ -49,6 +50,9 @@
           >
             <el-button type="primary">上传图片</el-button>
           </el-upload>
+        </el-form-item>
+
+          <el-input v-model="form.img" placeholder="缩略图"></el-input>
         </el-form-item>
 
         <el-form-item label="名称" prop="name">
@@ -94,9 +98,11 @@ export default {
       this.form = JSON.parse(JSON.stringify(row))  // 给form对象赋值  注意要深拷贝数据
       this.fromVisible = true   // 打开弹窗
     },
+
     handleImgSuccess(response, file, fileList) {
       this.form.img = response.data
     },
+
     save() {   // 保存按钮触发的逻辑  它会触发新增或者更新
       this.$refs.formRef.validate((valid) => {
         if (valid) {
