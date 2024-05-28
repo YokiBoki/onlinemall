@@ -14,8 +14,20 @@
     <div class="table">
       <el-table :data="tableData" strip @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55" align="center"></el-table-column>
-        <el-table-column prop="id" label="序号" width="70" align="center" sortable></el-table-column>
-        <el-table-column prop="img" label="缩略图"></el-table-column>
+
+        <el-table-column prop="id" label="序号" width="70" align="center" sortable>
+          <template v-slot="scope">{{ scope.$index + 1}}</template>
+        </el-table-column>
+        <el-table-column prop="img" label="缩略图">
+          <template v-slot="scope">
+            <div style="display: flex; align-items: center">
+              <el-image style="width: 40px; height: 40px;" v-if="scope.row.img"
+                        :src="scope.row.img" :preview-src-list="[scope.row.img]"></el-image>
+            </div>
+          </template>
+        </el-table-column>
+
+
         <el-table-column prop="name" label="名称"></el-table-column>
         <el-table-column label="操作" align="center" width="180">
           <template v-slot="scope">
@@ -41,7 +53,6 @@
     <el-dialog title="圈子" :visible.sync="fromVisible" width="40%" :close-on-click-modal="false" destroy-on-close>
       <el-form :model="form" label-width="100px" style="padding-right: 50px" :rules="rules" ref="formRef">
         <el-form-item label="缩略图" prop="img">
-
           <el-upload
               :action="$baseUrl + '/files/upload'"
               :headers="{ token: user.token }"
@@ -54,7 +65,6 @@
 
           <el-input v-model="form.img" placeholder="缩略图"></el-input>
         </el-form-item>
-
         <el-form-item label="名称" prop="name">
           <el-input v-model="form.name" placeholder="名称"></el-input>
         </el-form-item>
