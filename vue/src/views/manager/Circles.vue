@@ -14,6 +14,7 @@
     <div class="table">
       <el-table :data="tableData" strip @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55" align="center"></el-table-column>
+
         <el-table-column prop="id" label="序号" width="70" align="center" sortable>
           <template v-slot="scope">{{ scope.$index + 1}}</template>
         </el-table-column>
@@ -25,6 +26,7 @@
             </div>
           </template>
         </el-table-column>
+
 
         <el-table-column prop="name" label="名称"></el-table-column>
         <el-table-column label="操作" align="center" width="180">
@@ -61,6 +63,8 @@
           </el-upload>
         </el-form-item>
 
+          <el-input v-model="form.img" placeholder="缩略图"></el-input>
+        </el-form-item>
         <el-form-item label="名称" prop="name">
           <el-input v-model="form.name" placeholder="名称"></el-input>
         </el-form-item>
@@ -104,9 +108,11 @@ export default {
       this.form = JSON.parse(JSON.stringify(row))  // 给form对象赋值  注意要深拷贝数据
       this.fromVisible = true   // 打开弹窗
     },
+
     handleImgSuccess(response, file, fileList) {
       this.form.img = response.data
     },
+
     save() {   // 保存按钮触发的逻辑  它会触发新增或者更新
       this.$refs.formRef.validate((valid) => {
         if (valid) {

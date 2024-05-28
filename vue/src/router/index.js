@@ -27,7 +27,6 @@ const routes = [
       { path: 'goods', name: 'Goods', meta: { name: '商品信息1' }, component: () => import('../views/manager/Goods') },
       { path: 'circles', name: 'Circles', meta: { name: '小圈1' }, component: () => import('../views/manager/Circles') },
 
-
     ]
   },
   {
