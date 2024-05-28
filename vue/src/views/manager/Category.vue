@@ -14,7 +14,9 @@
     <div class="table">
       <el-table :data="tableData" stripe  @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55" align="center"></el-table-column>
-        <el-table-column prop="id" label="序号" width="80" align="center" sortable></el-table-column>
+        <el-table-column prop="id" label="序号" width="80" align="center" sortable>
+          <template v-slot="scope">{{ scope.$index + 1}}</template>
+        </el-table-column>
         <el-table-column prop="name" label="名称" show-overflow-tooltip></el-table-column>
 
         <el-table-column label="操作" width="180" align="center">
