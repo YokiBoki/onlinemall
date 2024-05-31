@@ -28,6 +28,8 @@ const routes = [
       { path: 'circles', name: 'Circles', meta: { name: '小圈1' }, component: () => import('../views/manager/Circles') },
       { path: 'posts', name: 'Posts', meta: { name: '论坛' }, component: () => import('../views/manager/Posts') },
       { path: 'help', name: 'Help', meta: { name: '帮助' }, component: () => import('../views/manager/Help') },
+      { path: 'address', name: 'Address', meta: { name: '地址' }, component: () => import('../views/manager/Address') },
+      { path: 'feedback', name: 'Feedback', meta: { name: '反馈' }, component: () => import('../views/manager/Feedback') },
 
     ]
   },

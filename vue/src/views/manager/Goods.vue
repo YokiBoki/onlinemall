@@ -7,13 +7,16 @@
     </div>
 
     <div class="operation">
+      <el-button type="primary" plain @click="handleAdd">新增</el-button>
       <el-button type="danger" plain @click="delBatch">批量删除</el-button>
     </div>
 
     <div class="table">
       <el-table :data="tableData" strip @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55" align="center"></el-table-column>
-        <el-table-column prop="id" label="序号" width="70" align="center" sortable></el-table-column>
+        <el-table-column prop="id" label="序号" width="70" align="center" sortable>
+          <template v-slot="scope">{{ scope.$index + 1}}</template>
+        </el-table-column>
         <el-table-column prop="name" label="名称" show-overflow-tooltip></el-table-column>
         <el-table-column prop="price" label="价格"></el-table-column>
         <el-table-column prop="content" label="详情" width="100">

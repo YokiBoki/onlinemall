@@ -48,6 +48,8 @@
             <el-menu-item index="/circles">小圈子</el-menu-item>
             <el-menu-item index="/posts">论坛</el-menu-item>
             <el-menu-item index="/help">帮助</el-menu-item>
+            <el-menu-item index="/address">地址</el-menu-item>
+            <el-menu-item index="/feedback">反馈</el-menu-item>
 
           </el-submenu>
 
