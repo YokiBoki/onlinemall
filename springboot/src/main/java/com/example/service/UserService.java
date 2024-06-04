@@ -40,7 +40,7 @@ public class UserService {
         if (ObjectUtil.isEmpty(user.getName())) {
             user.setName(user.getUsername());
         }
-        user.setRole(RoleEnum.ADMIN.name());
+        user.setRole(RoleEnum.USER.name());
         userMapper.insert(user);
     }
 
@@ -102,19 +102,21 @@ public class UserService {
             throw new CustomException(ResultCodeEnum.USER_ACCOUNT_ERROR);
         }
         // 生成token
-        String tokenData = dbUser.getId() + "-" + RoleEnum.ADMIN.name();
+        String tokenData = dbUser.getId() + "-" + RoleEnum.USER.name();
         String token = TokenUtils.createToken(tokenData, dbUser.getPassword());
         dbUser.setToken(token);
         return dbUser;
     }
+
 
     /**
      * 注册
      */
     public void register(Account account) {
         User user = new User();
-        BeanUtils.copyProperties(account, user);
-        add(user);
+        user.setUsername(account.getUsername());
+        user.setPassword(account.getPassword());
+        this.add(user);
     }
 
     /**

@@ -69,5 +69,12 @@ public class GoodsService {
         List<Goods> list = goodsMapper.selectAll(goods);
         return PageInfo.of(list);
     }
-
+    /**
+     * 前台分页查询
+     */
+    public PageInfo<Goods> selectFrontPage(Goods goods, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Goods> list = goodsMapper.selectFrontAll(goods);
+        return PageInfo.of(list);
+    }
 }

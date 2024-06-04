@@ -32,5 +32,5 @@ public interface GoodsMapper {
      * 查询所有
      */
     List<Goods> selectAll(Goods goods);
-
+    List<Goods> selectFrontAll(Goods goods);
 }
