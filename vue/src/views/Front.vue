@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="background-color:#f8f8f8;">
     <!--头部-->
     <div class="front-header">
       <div class="front-header-left">
@@ -18,8 +18,8 @@
         <div v-else>
           <el-dropdown>
             <div class="front-header-dropdown">
-              <img :src="user.avatar" alt="">
-              <div style="margin-left: 10px">
+              <img :src="user.avatar" alt="" style="border-radius: 50%">
+              <div style="margin-left: 10px ;color: #eeeeee;cursor: pointer;">
                 <span>{{ user.name }}</span><i class="el-icon-arrow-down" style="margin-left: 5px"></i>
               </div>
             </div>

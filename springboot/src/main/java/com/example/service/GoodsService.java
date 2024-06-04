@@ -1,7 +1,13 @@
 package com.example.service;
 
+import com.example.entity.Account;
+import com.example.entity.Collect;
 import com.example.entity.Goods;
+import com.example.entity.Likes;
+import com.example.mapper.CollectMapper;
 import com.example.mapper.GoodsMapper;
+import com.example.mapper.LikesMapper;
+import com.example.utils.TokenUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import javax.annotation.Resource;
@@ -16,6 +22,11 @@ public class GoodsService {
 
     @Resource
     private GoodsMapper goodsMapper;
+    @Resource
+    private LikesMapper likesMapper;
+
+    @Resource
+    private CollectMapper collectMapper;
 
     /**
      * 新增
@@ -51,7 +62,17 @@ public class GoodsService {
      * 根据ID查询
      */
     public Goods selectById(Integer id) {
-        return goodsMapper.selectById(id);
+        Goods goods =goodsMapper.selectById(id);
+        Account currentUser = TokenUtils.getCurrentUser();
+        Likes likes = likesMapper.selectByUserIdAndFid(currentUser.getId(), id);
+        goods.setUserLikes(likes != null);
+        int likesCount =likesMapper.selectCountByFid(id);
+        goods.setLikesCount(likesCount);
+        Collect collect = collectMapper.selectByUserIdAndFid(currentUser.getId(), id);
+        goods.setUserCollect( collect != null);
+        int collectCount =collectMapper.selectCountByFid(id);
+        goods.setCollectCount(collectCount);
+        return goods;
     }
 
     /**
@@ -76,5 +97,9 @@ public class GoodsService {
         PageHelper.startPage(pageNum, pageSize);
         List<Goods> list = goodsMapper.selectFrontAll(goods);
         return PageInfo.of(list);
+    }
+
+    public void updateReadCount(Integer id) {
+        goodsMapper.updateReadCount(id);
     }
 }

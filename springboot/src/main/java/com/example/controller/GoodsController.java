@@ -55,6 +55,14 @@ public class GoodsController {
     }
 
     /**
+     * 商品更新浏览量
+     */
+    @PutMapping("/updateReadCount/{id}")
+    public Result updateReadCount(@PathVariable Integer id) {
+        goodsService.updateReadCount(id);
+        return Result.success();
+    }
+    /**
      * 根据ID查询
      */
     @GetMapping("/selectById/{id}")
