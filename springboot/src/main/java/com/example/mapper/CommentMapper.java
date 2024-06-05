@@ -2,6 +2,7 @@ package com.example.mapper;
 
 import com.example.entity.Comment;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -35,7 +36,13 @@ public interface CommentMapper {
      */
     List<Comment> selectAll(Comment comment);
 
-    List<Comment> selectRoot(@Param("fid") Integer id,@Param("module") String module);
+    List<Comment> selectRoot(@Param("fid") Integer fid, @Param("module") String module);
 
     List<Comment> selectByRootId(Integer rootId);
+
+    @Select("select count(*) from comment where fid = #{fid} and module = #{module}")
+    Integer selectCount(@Param("fid") Integer fid, @Param("module") String module);
+
+    @Select("select * from comment where pid = #{pid}")
+    List<Comment> selectByPid(Integer pid);
 }

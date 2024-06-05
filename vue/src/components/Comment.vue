@@ -77,7 +77,7 @@ export default {
       this.$confirm('您确定删除吗？', '确认删除', {type: "warning"}).then(response => {
         this.$request.delete('/comment/delete/' + commentId).then(res => {
           if (res.code === '200') {   // 表示操作成功
-            this.$message.success('操作成功')
+            this.$message.success('成功删除')
             this.loadComment()
           } else {
             this.$message.error(res.msg)  // 弹出错误的信息
@@ -103,7 +103,7 @@ export default {
       }
       this.$request.post('/comment/add', data).then(res => {
         if (res.code === '200') {
-          this.$message.success('操作成功')
+          this.$message.success('评论成功')
           this.content = ''
           this.loadComment()
         } else {

@@ -37,6 +37,15 @@ public class CommentController {
     }
 
     /**
+     * 递归删除
+     */
+    @DeleteMapping("/deleteDeep/{id}")
+    public Result deleteDepp(@PathVariable Integer id) {
+        commentService.deleteDeep(id);
+        return Result.success();
+    }
+
+    /**
      * 批量删除
      */
     @DeleteMapping("/delete/batch")
@@ -84,10 +93,15 @@ public class CommentController {
     }
 
     @GetMapping("/selectTree/{fid}/{module}")
-    public Result selectPage(@PathVariable Integer fid,
-                             @PathVariable String module) {
-        List<Comment> commentList= commentService.selectTree(fid,module);
+    public Result selectTree(@PathVariable Integer fid, @PathVariable String module) {
+        List<Comment> commentList = commentService.selectTree(fid, module);
         return Result.success(commentList);
+    }
+
+    @GetMapping("/selectCount/{fid}/{module}")
+    public Result selectCount(@PathVariable Integer fid, @PathVariable String module) {
+        Integer count = commentService.selectCount(fid, module);
+        return Result.success(count);
     }
 
 }

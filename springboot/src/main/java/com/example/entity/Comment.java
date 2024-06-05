@@ -25,11 +25,9 @@ public class Comment implements Serializable {
     private String module;
     /** 根节点ID */
     private Integer rootId;
-
-    private String uerName;
-    private List<Comment> children;
-    private String parentUserName;
+    private String userName;
     private String avatar;
+    private String parentUserName;
 
     public String getParentUserName() {
         return parentUserName;
@@ -47,6 +45,8 @@ public class Comment implements Serializable {
         this.avatar = avatar;
     }
 
+    private List<Comment> children;
+
     public List<Comment> getChildren() {
         return children;
     }
@@ -55,12 +55,12 @@ public class Comment implements Serializable {
         this.children = children;
     }
 
-    public String getUerName() {
-        return uerName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUerName(String uerName) {
-        this.uerName = uerName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public Integer getId() {

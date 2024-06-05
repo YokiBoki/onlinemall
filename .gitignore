@@ -45,6 +45,7 @@ build/
 target/
 bin/
 
+files/
 # 忽略NPM调试日志文件
 npm-debug.log*
 
