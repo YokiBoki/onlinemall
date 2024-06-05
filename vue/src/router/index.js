@@ -30,6 +30,7 @@ const routes = [
       { path: 'help', name: 'Help', meta: { name: '帮助' }, component: () => import('../views/manager/Help') },
       { path: 'address', name: 'Address', meta: { name: '地址' }, component: () => import('../views/manager/Address') },
       { path: 'feedback', name: 'Feedback', meta: { name: '反馈' }, component: () => import('../views/manager/Feedback') },
+      { path: 'comment', name: 'Comment', meta: { name: '评论管理' }, component: () => import('../views/manager/Comment.vue') },
 
     ]
   },
@@ -41,6 +42,9 @@ const routes = [
       { path: 'home', name: 'Home', meta: { name: '系统首页' }, component: () => import('../views/front/Home') },
       { path: 'person', name: 'Person', meta: { name: '个人信息' }, component: () => import('../views/front/Person') },
       { path: 'goodsDetail', name: 'GoodsDetail', meta: { name: '商品详情' }, component: () => import('../views/front/GoodsDetail') },
+      { path: 'collect', name: 'Collect', meta: { name: '购物车' }, component: () => import('../views/front/Collect') },
+      { path: 'comment', name: 'Comment', meta: { name: '评论' }, component: () => import('../components/Comment.vue') },
+
     ]
   },
   { path: '/login', name: 'Login', meta: { name: '登录' }, component: () => import('../views/Login.vue') },

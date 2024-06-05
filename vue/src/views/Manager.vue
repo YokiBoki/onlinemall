@@ -50,6 +50,8 @@
             <el-menu-item index="/help">帮助</el-menu-item>
             <el-menu-item index="/address">地址</el-menu-item>
             <el-menu-item index="/feedback">反馈</el-menu-item>
+            <el-menu-item index="/comment">评论管理</el-menu-item>
+
 
           </el-submenu>
 

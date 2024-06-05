@@ -25,8 +25,16 @@
             </div>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>
-                <div style="text-decoration: none" @click="logout">退出</div>
+                <div style="text-decoration: none" @click="$router.push('/front/person')">个人信息</div>
               </el-dropdown-item>
+              <el-dropdown-item>
+                <div style="text-decoration: none" @click="$router.push('/front/collect')">购物车</div>
+              </el-dropdown-item>
+
+              <el-dropdown-item>
+                <div style="text-decoration: none" @click="logout">退出登录</div>
+              </el-dropdown-item>
+
             </el-dropdown-menu>
           </el-dropdown>
         </div>
@@ -88,6 +96,7 @@ export default {
       localStorage.removeItem("xm-user");
       this.$router.push("/login");
     },
+
   }
 
 }

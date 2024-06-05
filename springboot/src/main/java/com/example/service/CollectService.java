@@ -2,11 +2,15 @@ package com.example.service;
 
 import com.example.entity.Account;
 import com.example.entity.Collect;
+import com.example.entity.Help;
 import com.example.mapper.CollectMapper;
 import com.example.utils.TokenUtils;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class CollectService {
@@ -27,4 +31,24 @@ public class CollectService {
         }
     }
 
+    /**
+     * 分页查询
+     */
+    public PageInfo<Collect> selectPage(Integer pageNum, Integer pageSize) {
+        Account currentUser = TokenUtils.getCurrentUser();
+        Integer userId = currentUser.getId();
+        PageHelper.startPage(pageNum, pageSize);
+        List<Collect> list = collectMapper.selectAll(userId);
+        return PageInfo.of(list);
+    }
+
+    public void deleteById(Integer id) {
+        collectMapper.deleteById(id);
+    }
+
+    public void deleteBatch(List<Integer> ids) {
+        for (Integer id : ids) {
+            this.deleteById(id);
+        }
+    }
 }

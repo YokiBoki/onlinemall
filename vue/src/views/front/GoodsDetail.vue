@@ -33,8 +33,8 @@
         <div v-html="goods.content"></div>
       </div>
 
-      <div v-if="current === '商品评论'">
-
+      <div v-if="current === '商品评论'" class="card">
+        <Comment :fid="id" module="goods"/>
       </div>
 
     </div>
@@ -42,8 +42,10 @@
 </template>
 
 <script>
+import Comment from "@/components/Comment.vue";
 export default {
   name: "GoodsDetail",
+  components:{Comment},
   data() {
     return {
       id: this.$route.query.id,
