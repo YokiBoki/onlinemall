@@ -55,6 +55,14 @@ public class GoodsController {
     }
 
     /**
+     * 商品更新浏览量
+     */
+    @PutMapping("/updateReadCount/{id}")
+    public Result updateReadCount(@PathVariable Integer id) {
+        goodsService.updateReadCount(id);
+        return Result.success();
+    }
+    /**
      * 根据ID查询
      */
     @GetMapping("/selectById/{id}")
@@ -82,5 +90,14 @@ public class GoodsController {
         PageInfo<Goods> page = goodsService.selectPage(goods, pageNum, pageSize);
         return Result.success(page);
     }
-
+    /**
+     * 前台分页查询
+     */
+    @GetMapping("/selectFrontPage")
+    public Result selectFrontPage(Goods goods,
+                                  @RequestParam(defaultValue = "1") Integer pageNum,
+                                  @RequestParam(defaultValue = "10") Integer pageSize) {
+        PageInfo<Goods> page = goodsService.selectFrontPage(goods, pageNum, pageSize);
+        return Result.success(page);
+    }
 }

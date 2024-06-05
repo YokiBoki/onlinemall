@@ -1,19 +1,14 @@
 <template>
-  <div>
-    <div class="front-notice"><i class="el-icon-bell" style="margin-right: 2px"></i>公告：{{ top }}</div>
+  <div style="background-color:#f8f8f8;">
     <!--头部-->
     <div class="front-header">
       <div class="front-header-left">
         <img src="@/assets/imgs/logo.png" alt="">
-        <div class="title">项目前台</div>
+        <div class="title">跨境电商</div>
       </div>
       <div class="front-header-center">
-        <div class="front-header-nav">
-          <el-menu :default-active="$route.path" mode="horizontal" router>
-						<el-menu-item index="/front/home">首页</el-menu-item>
-						<el-menu-item index="/front/person">个人中心</el-menu-item>
-          </el-menu>
-        </div>
+        <div @click="$router.push(item.path)" class="menu" v-for="item in menus" :key="item.path"
+             :class="{'menu-active' : item.path === $route.path }">{{ item.text }}</div>
       </div>
       <div class="front-header-right">
         <div v-if="!user.username">
@@ -23,15 +18,23 @@
         <div v-else>
           <el-dropdown>
             <div class="front-header-dropdown">
-              <img :src="user.avatar" alt="">
-              <div style="margin-left: 10px">
+              <img :src="user.avatar" alt="" style="border-radius: 50%">
+              <div style="margin-left: 10px ;color: #eeeeee;cursor: pointer;">
                 <span>{{ user.name }}</span><i class="el-icon-arrow-down" style="margin-left: 5px"></i>
               </div>
             </div>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>
-                <div style="text-decoration: none" @click="logout">退出</div>
+                <div style="text-decoration: none" @click="$router.push('/front/person')">个人信息</div>
               </el-dropdown-item>
+              <el-dropdown-item>
+                <div style="text-decoration: none" @click="$router.push('/front/collect')">购物车</div>
+              </el-dropdown-item>
+
+              <el-dropdown-item>
+                <div style="text-decoration: none" @click="logout">退出登录</div>
+              </el-dropdown-item>
+
             </el-dropdown-menu>
           </el-dropdown>
         </div>
@@ -41,6 +44,7 @@
     <div class="main-body">
       <router-view ref="child" @update:user="updateUser" />
     </div>
+
   </div>
 
 </template>
@@ -52,9 +56,15 @@ export default {
 
   data () {
     return {
-      top: '',
       notice: [],
       user: JSON.parse(localStorage.getItem("xm-user") || '{}'),
+      menus: [
+        { text: '热卖专区', path: '/front/home' },
+        { text: '社区广场', path: '/front/posts' },
+        { text: '求购专区', path: '/front/helpView' },
+        { text: '系统公告', path: '/front/notice' },
+        { text: '留言反馈', path: '/front/feedback' },
+      ]
     }
   },
 
@@ -86,6 +96,7 @@ export default {
       localStorage.removeItem("xm-user");
       this.$router.push("/login");
     },
+
   }
 
 }
@@ -93,4 +104,19 @@ export default {
 
 <style scoped>
   @import "@/assets/css/front.css";
+
+  .menu {
+    color: #74d6e8;
+    font-size: 16px;
+    padding: 0 20px;
+    cursor: pointer;
+  }
+
+  .menu:hover{
+    color: #fda1bd;
+  }
+  .menu-active{
+    color: #fda1bd;
+  }
+
 </style>

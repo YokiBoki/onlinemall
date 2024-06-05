@@ -34,6 +34,52 @@ public class Goods implements Serializable {
     /** 浏览量 */
     private Integer readCount;
     private String userName;
+    private String sort;
+
+    private Boolean userCollect;
+    private Boolean userLikes;
+    private Integer likesCount;
+    private Integer collectCount;
+
+    public Boolean getUserCollect() {
+        return userCollect;
+    }
+
+    public void setUserCollect(Boolean userCollect) {
+        this.userCollect = userCollect;
+    }
+
+    public Boolean getUserLikes() {
+        return userLikes;
+    }
+
+    public void setUserLikes(Boolean userLikes) {
+        this.userLikes = userLikes;
+    }
+
+    public Integer getLikesCount() {
+        return likesCount;
+    }
+
+    public void setLikesCount(Integer likesCount) {
+        this.likesCount = likesCount;
+    }
+
+    public Integer getCollectCount() {
+        return collectCount;
+    }
+
+    public void setCollectCount(Integer collectCount) {
+        this.collectCount = collectCount;
+    }
+
+    public String getSort() {
+        return sort;
+    }
+
+    public void setSort(String sort) {
+        this.sort = sort;
+    }
 
     public String getUserName() {
         return userName;

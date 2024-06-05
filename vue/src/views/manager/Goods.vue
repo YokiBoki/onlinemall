@@ -84,7 +84,16 @@
           <el-input v-model="form.address" placeholder="发货地址"></el-input>
         </el-form-item>
         <el-form-item label="图片" prop="img">
-          <el-input v-model="form.img" placeholder="图片"></el-input>
+
+          <el-upload
+              :action="$baseUrl + '/files/upload'"
+              :headers="{ token: user.token }"
+              list-type="picture"
+              :on-success="handleImgSuccess"
+          >
+            <el-button type="primary">上传</el-button>
+          </el-upload>
+
         </el-form-item>
         <el-form-item label="上架日期" prop="date">
           <el-input v-model="form.date" placeholder="上架日期"></el-input>
@@ -101,9 +110,7 @@
         <el-form-item label="上架状态" prop="saleStatus">
           <el-input v-model="form.saleStatus" placeholder="上架状态"></el-input>
         </el-form-item>
-        <el-form-item label="浏览量" prop="readCount">
-          <el-input v-model="form.readCount" placeholder="浏览量"></el-input>
-        </el-form-item>
+
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="fromVisible = false">取 消</el-button>
@@ -141,6 +148,10 @@ export default {
     preview(content) {
       this.content = content
       this.fromVisible1 = true
+    },
+
+    handleImgSuccess(response, file, fileList) {
+      this.form.img = response.data
     },
     changeStatus(row, status) {
       this.$confirm('您确定操作吗？', '确认操作', {type: "warning"}).then(response => {
