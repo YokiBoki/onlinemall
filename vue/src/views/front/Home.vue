@@ -1,16 +1,20 @@
 <template>
-  <div style="background-color: #eeeeee; min-height: 100vh">
+  <div style="min-height: 100vh">
     <div class="bg">
       <div style="width: 600px">
         <div style="text-align: center; color: #eee; font-size: 30px; margin-bottom: 20px">好看、好用、好玩，都在这里</div>
         <div style="display: flex">
-          <el-input size="medium" prefix-icon="el-icon-search" placeholder="请输入商品名称关键字搜索"></el-input>
-          <el-button size="medium" type="primary" style="margin-left: 5px; background-color: #409EFF"><i class="el-icon-search"></i></el-button>
+          <el-input v-model="name" size="medium" prefix-icon="el-icon-search" placeholder="请输入商品名称关键字搜索"></el-input>
+          <el-button @click="$router.push({ path: '/front/search', query: { name: name } })" size="medium" type="primary" style="margin-left: 5px; background-color: #409EFF"><i class="el-icon-search"></i></el-button>
         </div>
       </div>
     </div>
 
-    <div style="width: 70%; background-color: #fff; margin: 10px auto; padding: 20px; border-radius: 5px">
+    <div style="width: 70%; background-color: #fff; margin: 10px auto; padding: 20px; border-radius: 5px; position: relative">
+
+      <el-button @click="$router.push('/front/addGoods')" style="position: absolute; top: 20px; right: -150px" size="medium" type="primary" plain>发布商品</el-button>
+      <el-button style="position: absolute; top: 70px; right: -150px" size="medium" type="primary" plain>发布求购</el-button>
+
       <div style="margin-bottom: 20px">
         <el-select v-model="category" size="medium" style="width: 200px" @change="loadGoods(1)">
           <el-option value="全部"></el-option>
@@ -26,17 +30,29 @@
       <div>
         <el-row :gutter="15">
           <el-col :span="6" v-for="item in goodsList" :key="item.id">
-            <div style="margin-bottom: 20px" class="goods-item" @click="$router.push('/front/goodsDetail?id='+item.id)">
+            <div style="margin-bottom: 20px" class="goods-item" @click="$router.push('/front/goodsDetail?id=' + item.id)">
               <img :src="item.img" alt="" style="width: 100%; display: block; height: 260px; margin-bottom: 10px; border-radius: 5px">
               <div style="font-size: 16px; height: 40px; color: #555; margin-bottom: 10px" class="line2 goods-name">{{ item.name }}</div>
               <div style="display: flex; align-items: baseline">
                 <strong style="color: red; font-size: 24px">￥{{ item.price }}</strong>
                 <span style="margin-left: 20px; color: #666">{{ item.readCount }}人浏览</span>
-                <span style="margin-left: 20px; color: #666">100人点赞</span>
+                <span style="margin-left: 20px; color: #666">{{ item.likesCount }}人点赞</span>
               </div>
             </div>
           </el-col>
         </el-row>
+
+        <div style="margin: 15px auto">
+          <el-pagination
+              background
+              @current-change="handleCurrentChange"
+              :current-page="pageNum"
+              :page-sizes="[5, 10, 20]"
+              :page-size="pageSize"
+              layout="total, prev, pager, next"
+              :total="total">
+          </el-pagination>
+        </div>
       </div>
 
     </div>
@@ -53,10 +69,11 @@ export default {
       categoryList: [],
       goodsList: [],  // 所有的数据
       pageNum: 1,   // 当前的页码
-      pageSize: 10,  // 每页显示的个数
+      pageSize: 12,  // 每页显示的个数
       total: 0,
       category: '全部',
-      sort: '最新'
+      sort: '最新',
+      name: ''
     }
   },
   mounted() {
@@ -88,6 +105,9 @@ export default {
         }
       })
     },
+    handleCurrentChange(pageNum) {
+      this.loadGoods(pageNum)
+    },
   }
 }
 </script>
@@ -95,7 +115,7 @@ export default {
 <style scoped>
 .bg {
   height: 400px;
-  background-image: url("@/assets/imgs/sayaka.jpg");
+  background-image: url("@/assets/imgs/breakfastbanner.png");
   background-size: 100%;
   background-position-y: center;
   display: flex;
@@ -113,6 +133,6 @@ export default {
   scale: 1.03;
 }
 .goods-item:hover .goods-name {
-  color: #74d6e8 !important;
+  color: #ec3d3d !important;
 }
 </style>

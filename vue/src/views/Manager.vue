@@ -42,14 +42,11 @@
             <template slot="title">
               <i class="el-icon-menu"></i><span>信息管理</span>
             </template>
-            <el-menu-item index="/notice">公告信息</el-menu-item>
-            <el-menu-item index="/category">分类信息</el-menu-item>
-            <el-menu-item index="/goods">商品信息</el-menu-item>
-            <el-menu-item index="/circles">小圈子</el-menu-item>
-            <el-menu-item index="/posts">论坛</el-menu-item>
-            <el-menu-item index="/help">帮助</el-menu-item>
-            <el-menu-item index="/address">地址</el-menu-item>
-            <el-menu-item index="/feedback">反馈</el-menu-item>
+            <el-menu-item index="/notice">公告管理</el-menu-item>
+            <el-menu-item index="/category">分类管理</el-menu-item>
+            <el-menu-item index="/goods">商品管理</el-menu-item>
+            <el-menu-item index="/orders">订单管理</el-menu-item>
+            <el-menu-item index="/address">地址管理</el-menu-item>
             <el-menu-item index="/comment">评论管理</el-menu-item>
 
 

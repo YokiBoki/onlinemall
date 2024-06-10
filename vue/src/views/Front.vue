@@ -2,10 +2,12 @@
   <div style="background-color:#f8f8f8;">
     <!--头部-->
     <div class="front-header">
+      <a href="/front/home">
       <div class="front-header-left">
         <img src="@/assets/imgs/logo.png" alt="">
         <div class="title">跨境电商</div>
       </div>
+      </a>
       <div class="front-header-center">
         <div @click="$router.push(item.path)" class="menu" v-for="item in menus" :key="item.path"
              :class="{'menu-active' : item.path === $route.path }">{{ item.text }}</div>
@@ -24,6 +26,15 @@
               </div>
             </div>
             <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item>
+                <div style="text-decoration: none" @click="$router.push('/front/frontGoods')">我的商品</div>
+              </el-dropdown-item>
+              <el-dropdown-item>
+                <div style="text-decoration: none" @click="$router.push('/front/orders')">我的订单</div>
+              </el-dropdown-item>
+              <el-dropdown-item>
+                <div style="text-decoration: none" @click="$router.push('/front/address')">收货地址</div>
+              </el-dropdown-item>
               <el-dropdown-item>
                 <div style="text-decoration: none" @click="$router.push('/front/person')">个人信息</div>
               </el-dropdown-item>
@@ -60,10 +71,7 @@ export default {
       user: JSON.parse(localStorage.getItem("xm-user") || '{}'),
       menus: [
         { text: '热卖专区', path: '/front/home' },
-        { text: '社区广场', path: '/front/posts' },
-        { text: '求购专区', path: '/front/helpView' },
         { text: '系统公告', path: '/front/notice' },
-        { text: '留言反馈', path: '/front/feedback' },
       ]
     }
   },

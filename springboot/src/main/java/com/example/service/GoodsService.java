@@ -1,5 +1,8 @@
 package com.example.service;
 
+import cn.hutool.core.date.DateUtil;
+import com.example.common.enums.RoleEnum;
+import com.example.common.enums.StatusEnums;
 import com.example.entity.Account;
 import com.example.entity.Collect;
 import com.example.entity.Goods;
@@ -11,6 +14,8 @@ import com.example.utils.TokenUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import javax.annotation.Resource;
+
+import org.apache.el.parser.Token;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -32,6 +37,11 @@ public class GoodsService {
      * 新增
      */
     public void add(Goods goods) {
+        goods.setDate(DateUtil.today());
+        Account currenetuser = TokenUtils.getCurrentUser();
+        goods.setUserId(currenetuser.getId());
+        goods.setStatus(StatusEnums.NOT_AUDIT.value);
+        goods.setReadCount(0);
         goodsMapper.insert(goods);
     }
 
@@ -55,6 +65,10 @@ public class GoodsService {
      * 修改
      */
     public void updateById(Goods goods) {
+        Account currentUser =TokenUtils.getCurrentUser();
+        if (RoleEnum.USER.name().equals(currentUser.getRole())) {
+            goods.setStatus(StatusEnums.NOT_AUDIT.value);
+        }
         goodsMapper.updateById(goods);
     }
 
@@ -86,6 +100,10 @@ public class GoodsService {
      * 分页查询
      */
     public PageInfo<Goods> selectPage(Goods goods, Integer pageNum, Integer pageSize) {
+        Account currentUser =TokenUtils.getCurrentUser();
+        if (RoleEnum.USER.name().equals(currentUser.getRole())) {
+            goods.setUserId(currentUser.getId());
+        }
         PageHelper.startPage(pageNum, pageSize);
         List<Goods> list = goodsMapper.selectAll(goods);
         return PageInfo.of(list);
@@ -94,12 +112,21 @@ public class GoodsService {
      * 前台分页查询
      */
     public PageInfo<Goods> selectFrontPage(Goods goods, Integer pageNum, Integer pageSize) {
+
         PageHelper.startPage(pageNum, pageSize);
         List<Goods> list = goodsMapper.selectFrontAll(goods);
+        for (Goods g : list){
+            int likesCount =likesMapper.selectCountByFid(g.getId());
+            g.setLikesCount(likesCount);
+        }
         return PageInfo.of(list);
     }
 
     public void updateReadCount(Integer id) {
         goodsMapper.updateReadCount(id);
+    }
+
+    public void updateLikesCount(Integer id) {
+        goodsMapper.updateLikesCount(id);
     }
 }

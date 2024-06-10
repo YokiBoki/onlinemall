@@ -4,6 +4,7 @@ module.exports = defineConfig({
   devServer: {
     port: 8080
   },
+
   chainWebpack: config =>{
     config.plugin('html')
         .tap(args => {
@@ -12,3 +13,16 @@ module.exports = defineConfig({
         })
   }
 })
+
+const path = require('path');
+
+module.exports = {
+    configureWebpack: {
+        resolve: {
+            fallback: {
+                path: require.resolve('path-browserify')
+            }
+        }
+    }
+};
+
