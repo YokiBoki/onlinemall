@@ -37,4 +37,6 @@ public interface GoodsMapper {
     List<Goods> selectFrontAll(Goods goods);
     @Update("update goods set read_count = read_count + 1 where id = #{id}")
     void updateReadCount(Integer id);
+    @Update("update goods set like_count = like_count where id = #{id}")
+    void updateLikesCount(Integer id);
 }

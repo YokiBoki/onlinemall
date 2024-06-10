@@ -55,11 +55,12 @@ public class GoodsController {
     }
 
     /**
-     * 商品更新浏览量
+     * 商品更新浏览量,点赞量
      */
     @PutMapping("/updateReadCount/{id}")
     public Result updateReadCount(@PathVariable Integer id) {
         goodsService.updateReadCount(id);
+        goodsService.updateLikesCount(id);
         return Result.success();
     }
     /**

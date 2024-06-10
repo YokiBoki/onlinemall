@@ -30,7 +30,8 @@ const routes = [
       { path: 'help', name: 'Help', meta: { name: '帮助' }, component: () => import('../views/manager/Help') },
       { path: 'address', name: 'Address', meta: { name: '地址' }, component: () => import('../views/manager/Address') },
       { path: 'feedback', name: 'Feedback', meta: { name: '反馈' }, component: () => import('../views/manager/Feedback') },
-      { path: 'comment', name: 'Comment', meta: { name: '评论管理' }, component: () => import('../views/manager/Comment.vue') },
+      { path: 'comment', name: 'Comment', meta: { name: '评论管理' }, component: () => import('../views/manager/Comment') },
+      { path: 'orders', name: 'Orders', meta: { name: '订单管理' }, component: () => import('../views/manager/Orders') },
 
     ]
   },
@@ -43,6 +44,12 @@ const routes = [
       { path: 'person', name: 'Person', meta: { name: '个人信息' }, component: () => import('../views/front/Person') },
       { path: 'goodsDetail', name: 'GoodsDetail', meta: { name: '商品详情' }, component: () => import('../views/front/GoodsDetail') },
       { path: 'collect', name: 'Collect', meta: { name: '购物车' }, component: () => import('../views/front/Collect') },
+      { path: 'notice', name: 'Notice', meta: { name: '公告' }, component: () => import('../views/front/Notice') },
+      { path: 'addGoods', name: 'AddGoods', meta: { name: '发布商品' }, component: () => import('../views/front/AddGoods') },
+      { path: 'frontGoods', name: 'FrontGoods', meta: { name: '我的商品' }, component: () => import('../views/front/FrontGoods') },
+      { path: 'address', name: 'Address', meta: { name: '地址' }, component: () => import('../views/front/Address') },
+      { path: 'orders', name: 'Orders', meta: { name: '订单' }, component: () => import('../views/front/Orders') },
+      { path: 'search', name: 'Search', meta: { name: '搜索' }, component: () => import('../views/front/Search') },
     ]
   },
   { path: '/login', name: 'Login', meta: { name: '登录' }, component: () => import('../views/Login.vue') },
