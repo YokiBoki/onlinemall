@@ -69,7 +69,7 @@
       <div v-html="content"></div>
     </el-dialog>
 
-    <el-dialog title="二手商品" :visible.sync="fromVisible" width="40%" :close-on-click-modal="false" destroy-on-close>
+    <el-dialog title="新增商品" :visible.sync="fromVisible" width="40%" :close-on-click-modal="false" destroy-on-close>
       <el-form :model="form" label-width="100px" style="padding-right: 50px" :rules="rules" ref="formRef">
         <el-form-item label="名称" prop="name">
           <el-input v-model="form.name" placeholder="名称"></el-input>

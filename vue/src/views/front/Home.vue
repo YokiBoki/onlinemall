@@ -13,7 +13,6 @@
     <div style="width: 70%; background-color: #fff; margin: 10px auto; padding: 20px; border-radius: 5px; position: relative">
 
       <el-button @click="$router.push('/front/addGoods')" style="position: absolute; top: 20px; right: -150px" size="medium" type="primary" plain>发布商品</el-button>
-      <el-button style="position: absolute; top: 70px; right: -150px" size="medium" type="primary" plain>发布求购</el-button>
 
       <div style="margin-bottom: 20px">
         <el-select v-model="category" size="medium" style="width: 200px" @change="loadGoods(1)">

@@ -15,7 +15,8 @@
         <el-table-column prop="goodsName" label="商品名称"></el-table-column>
         <el-table-column prop="goodsImg" label="商品图片">
           <template v-slot="scope">
-            <el-image v-if="scope.row.goodsImg" style="width: 50px" :src="scope.row.goodsImg" :preview-src-list="[scope.row.goodsImg]"></el-image>
+            <el-image v-if="scope.row.goodsImg" style="width: 50px" :src="scope.row.goodsImg"
+                      :preview-src-list="[scope.row.goodsImg]"></el-image>
           </template>
         </el-table-column>
         <el-table-column prop="orderNo" label="订单编号"></el-table-column>
