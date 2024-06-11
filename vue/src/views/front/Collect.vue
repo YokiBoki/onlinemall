@@ -19,13 +19,13 @@
         </el-table-column>
         <el-table-column label="商品链接">
           <template v-slot="scope">
-            <a :href="'/front/goodsDetail?id=' + scope.row.fid" target="_blank">查看详细</a>
+            <a :href="'/front/goodsDetail?id=' + scope.row.fid" target="_blank">点击打开</a>
           </template>
         </el-table-column>
 
         <el-table-column label="操作" width="100" align="center">
           <template v-slot="scope">
-            <el-button plain type="danger" size="mini" @click=del(scope.row.id)>删除商品</el-button>
+            <el-button plain type="danger" size="mini" @click=del(scope.row.id)>取消收藏</el-button>
           </template>
         </el-table-column>
       </el-table>

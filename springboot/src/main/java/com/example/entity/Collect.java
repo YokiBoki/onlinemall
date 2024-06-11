@@ -5,6 +5,26 @@ public class Collect {
     private Integer fid;//关联id
     private Integer userId;
     private String module;
+    /** 商品名称 */
+    private String goodsName;
+    /** 商品图片 */
+    private String goodsImg;
+
+    public String getGoodsName() {
+        return goodsName;
+    }
+
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
+    }
+
+    public String getGoodsImg() {
+        return goodsImg;
+    }
+
+    public void setGoodsImg(String goodsImg) {
+        this.goodsImg = goodsImg;
+    }
 
     public Integer getId() {
         return id;

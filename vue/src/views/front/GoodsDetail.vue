@@ -16,8 +16,10 @@
         <div>
           <el-button v-if="!goods.userLikes" @click="addLikes" size="medium" style="background-color: orangered; color: #eee; border-color: orangered">点赞</el-button>
           <el-button v-if="goods.userLikes" @click="addLikes" size="medium" style="background-color: orangered; color: #eee; border-color: orangered">已点赞</el-button>
-          <el-button v-if="!goods.userCollect" @click="addCollect" size="medium" style="background-color: orangered; color: #eee; border-color: orangered">收藏</el-button>
-          <el-button v-if="goods.userCollect" @click="addCollect" size="medium" style="background-color: orangered; color: #eee; border-color: orangered">已收藏</el-button>
+
+          <el-button v-if="!goods.userCollect" @click="addCollect" size="medium" style="background-color: orangered; color: #eee; border-color: orangered">加入购物车</el-button>
+          <el-button v-if="goods.userCollect" @click="addCollect" size="medium" style="background-color: orangered; color: #eee; border-color: orangered">已加购</el-button>
+
           <el-button size="medium" type="danger" @click="handleBuy">立即购买</el-button>
         </div>
       </div>
