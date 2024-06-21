@@ -84,10 +84,13 @@ public class OrdersController {
         return Result.success(page);
     }
 
+    /**
+     * 卖家的分页查询
+     */
     @GetMapping("/selectSalePage")
     public Result selectSalePage(Orders orders,
-                             @RequestParam(defaultValue = "1") Integer pageNum,
-                             @RequestParam(defaultValue = "10") Integer pageSize) {
+                                 @RequestParam(defaultValue = "1") Integer pageNum,
+                                 @RequestParam(defaultValue = "10") Integer pageSize) {
         PageInfo<Orders> page = ordersService.selectSalePage(orders, pageNum, pageSize);
         return Result.success(page);
     }
@@ -109,4 +112,5 @@ public class OrdersController {
         List<Dict> dictList = ordersService.selectBar();
         return Result.success(dictList);
     }
+
 }

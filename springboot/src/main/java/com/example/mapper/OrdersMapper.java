@@ -38,5 +38,4 @@ public interface OrdersMapper {
     @Select("select * from orders where order_no = #{orderNo}")
     Orders selectByOrderNo(String orderNo);
 
-    List<Orders> selectSaleAll(Orders orders);
 }

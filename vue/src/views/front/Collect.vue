@@ -2,7 +2,7 @@
   <div style="width: 70%; margin: 10px auto">
 
     <div style="margin-bottom: 10px">
-      <el-button type="danger" plain @click="delBatch">批量取消收藏</el-button>
+      <el-button type="danger" plain @click="delBatch">批量取消加购</el-button>
     </div>
 
     <div class="card">
@@ -25,7 +25,7 @@
 
         <el-table-column label="操作" width="100" align="center">
           <template v-slot="scope">
-            <el-button plain type="danger" size="mini" @click=del(scope.row.id)>取消收藏</el-button>
+            <el-button plain type="danger" size="mini" @click=del(scope.row.id)>取消加购</el-button>
           </template>
         </el-table-column>
       </el-table>

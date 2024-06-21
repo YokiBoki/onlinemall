@@ -1,61 +1,71 @@
 <template>
-  <div style="width: 100%; margin:10px auto" class="card">
-    <div style=" margin-bottom: 20px">
-      <el-radio-group v-model="url" @change="load(1)">
-        <el-radio-button label="selectAll">我购买的订单</el-radio-button>
-        <el-radio-button label="selectSaleAll">我出售的订单</el-radio-button>
-      </el-radio-group>
+  <div style="width: 85%; margin: 10px auto" class="card">
 
+    <div style="margin-bottom: 15px; display: flex">
+      <div style="flex: 1">
+        <el-radio-group v-model="url" @change="load(1)">
+          <el-radio-button label="selectPage">我购买的订单</el-radio-button>
+          <el-radio-button label="selectSalePage">我出售的订单</el-radio-button>
+        </el-radio-group>
+      </div>
+      <div>
+        <el-input v-model="goodsName" placeholder="请输入商品名称" style="width: 200px; margin-right: 5px" clearable></el-input>
+        <el-input v-model="orderNo" placeholder="请输入订单编号" style="width: 200px; margin-right: 5px" clearable></el-input>
+        <el-select v-model="status" style="width: 200px; margin-right: 5px" clearable>
+          <el-option value="已取消"></el-option>
+          <el-option value="待支付"></el-option>
+          <el-option value="待发货"></el-option>
+          <el-option value="待收货"></el-option>
+          <el-option value="已完成"></el-option>
+        </el-select>
+        <el-button type="primary" @click="load(1)">搜索</el-button>
+        <el-button type="warning" @click="reset">重置</el-button>
+      </div>
     </div>
 
-    <div style="margin: 10px auto">
-      <el-table :data="tableData" strip @selection-change="handleSelectionChange">
-        <el-table-column type="selection" width="45px" align="center"></el-table-column>
-        <el-table-column prop="id" label="序号" width="40px" align="center" sortable></el-table-column>
-        <el-table-column prop="goodsName" label="商品名称"></el-table-column>
+    <div style="margin: 10px 0">
+      <el-table :data="tableData" strip >
+        <el-table-column prop="id" label="序号" width="70" align="center" sortable></el-table-column>
+        <el-table-column prop="goodsName" label="商品名称" show-overflow-tooltip></el-table-column>
         <el-table-column prop="goodsImg" label="商品图片">
           <template v-slot="scope">
-
-            <el-image v-if="scope.row.goodsImg" style="width: 50px" :src="scope.row.goodsImg"
-                      :preview-src-list="[scope.row.goodsImg]"></el-image>
-
+            <el-image v-if="scope.row.goodsImg" style="width: 50px" :src="scope.row.goodsImg" :preview-src-list="[scope.row.goodsImg]"></el-image>
           </template>
         </el-table-column>
-        <el-table-column prop="orderNo" label="订单编号"></el-table-column>
+        <el-table-column prop="orderNo" label="订单编号" show-overflow-tooltip></el-table-column>
         <el-table-column prop="total" label="总价">
           <template v-slot="scope">
-            <span style="color: red">￥{{scope.row.total}}</span>
+            <span style="color: red">￥{{ scope.row.total }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="time" label="下单时间"></el-table-column>
-        <el-table-column prop="payNo" label="支付单号"></el-table-column>
-        <el-table-column prop="payTime" label="支付时间"></el-table-column>
-        <el-table-column prop="userName" label="下单人名称"></el-table-column>
-        <el-table-column prop="address" label="收货地址"></el-table-column>
-        <el-table-column prop="phone" label="联系方式"></el-table-column>
+        <el-table-column prop="time" label="下单时间" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="payNo" label="支付单号" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="payTime" label="支付时间" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="user" label="下单人名称" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="address" label="收货地址" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="phone" label="联系方式" show-overflow-tooltip></el-table-column>
         <el-table-column prop="userName" label="收货人名称"></el-table-column>
         <el-table-column prop="status" label="订单状态">
           <template v-slot="scope">
-            <el-tag type="info" v-if="scope.row.status === '已取消'">已取消</el-tag>
+            <el-tag type="danger" v-if="scope.row.status === '已取消'">已取消</el-tag>
             <el-tag type="danger" v-if="scope.row.status === '待支付'">待支付</el-tag>
-            <el-tag type="primary" v-if="scope.row.status === '待收货'">待收货</el-tag>
-            <el-tag type="warning" v-if="scope.row.status === '待发货'">待发货</el-tag>
+            <el-tag type="primary" v-if="scope.row.status === '待发货'">待发货</el-tag>
+            <el-tag type="info" v-if="scope.row.status === '待收货'">待收货</el-tag>
             <el-tag type="success" v-if="scope.row.status === '已完成'">已完成</el-tag>
-
           </template>
         </el-table-column>
         <el-table-column prop="saleName" label="卖家名称"></el-table-column>
-        <el-table-column label="操作" align="center" width="240">
+        <el-table-column label="操作" align="center" width="300">
           <template v-slot="scope">
-            <el-button v-if="scope.row.status === '待支付'" size="mini" type="primary" plain @click="pay(scope.row.orderNo)">支付订单</el-button>
-            <el-button v-if="scope.row.status === '待支付'" size="mini" type="danger" plain @click="changeStatus(scope.row,'已取消')">取消订单</el-button>
-            <el-button v-if="scope.row.status === '待发货' && scope.row.saleId === user.id" size="mini" type="info" plain @click="changeStatus(scope.row,'待收货')">确认发货</el-button>
-            <el-button v-if="scope.row.status === '待收货' && scope.row.userId === user.id" size="mini" type="primary" plain @click="changeStatus(scope.row,'已完成')">确认收货</el-button>
+            <el-button v-if="scope.row.status === '待支付'" size="mini" type="primary" plain @click="pay(scope.row.orderNo)">支付</el-button>
+            <el-button v-if="scope.row.status === '待支付'" size="mini" type="danger" plain @click="changeStatus(scope.row, '已取消')">取消</el-button>
+            <el-button v-if="scope.row.status === '待发货' && scope.row.saleId === user.id" size="mini" type="info" plain @click="changeStatus(scope.row, '待收货')">发货</el-button>
+            <el-button v-if="scope.row.status === '待收货' && scope.row.userId === user.id" size="mini" type="primary" plain @click="changeStatus(scope.row, '已完成')">收货</el-button>
           </template>
         </el-table-column>
       </el-table>
 
-      <div class="pagination">
+      <div style="margin: 15px 0">
         <el-pagination
             background
             @current-change="handleCurrentChange"
@@ -124,18 +134,20 @@ export default {
   name: "Orders",
   data() {
     return {
-      url:'selectPage',
+      url: 'selectPage',
       tableData: [],  // 所有的数据
       pageNum: 1,   // 当前的页码
       pageSize: 10,  // 每页显示的个数
       total: 0,
-      name: null,
       fromVisible: false,
       form: {},
       user: JSON.parse(localStorage.getItem('xm-user') || '{}'),
       rules: {
       },
-      ids: []
+      ids: [],
+      goodsName: null,
+      orderNo: null,
+      status: null
     }
   },
   created() {
@@ -221,11 +233,13 @@ export default {
     },
     load(pageNum) {  // 分页查询
       if (pageNum) this.pageNum = pageNum
-      this.$request.get('/orders/'+this.url, {
+      this.$request.get('/orders/' + this.url, {
         params: {
           pageNum: this.pageNum,
           pageSize: this.pageSize,
-          name: this.name,
+          goodsName: this.goodsName,
+          status: this.status,
+          orderNo: this.orderNo,
         }
       }).then(res => {
         if (res.code === '200') {
@@ -236,17 +250,13 @@ export default {
         }
       })
     },
-
     reset() {
-      this.name = null
+      this.goodsName = null
+      this.orderNo = null
+      this.status = null
       this.load(1)
     },
     handleCurrentChange(pageNum) {
-      if (this.role === 'buy'){
-        this.load(1)
-      }else{
-
-      }
       this.load(pageNum)
     },
   }

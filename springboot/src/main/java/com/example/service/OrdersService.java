@@ -30,7 +30,6 @@ public class OrdersService {
 
     @Resource
     private OrdersMapper ordersMapper;
-
     @Resource
     GoodsService goodsService;
     @Resource
@@ -49,7 +48,7 @@ public class OrdersService {
 
         Integer addressId = orders.getAddressId();
         Address address = addressService.selectById(addressId);
-        orders.setUserName(address.getName());
+        orders.setUserName(address.getUserName());
         orders.setAddress(address.getAddress());
         orders.setPhone(address.getPhone());
 
@@ -103,7 +102,7 @@ public class OrdersService {
      * 分页查询
      */
     public PageInfo<Orders> selectPage(Orders orders, Integer pageNum, Integer pageSize) {
-        Account currentUser =TokenUtils.getCurrentUser();
+        Account currentUser = TokenUtils.getCurrentUser();
         if (RoleEnum.USER.name().equals(currentUser.getRole())) {
             orders.setUserId(currentUser.getId());
         }
@@ -117,7 +116,7 @@ public class OrdersService {
     }
 
     public PageInfo<Orders> selectSalePage(Orders orders, Integer pageNum, Integer pageSize) {
-        Account currentUser =TokenUtils.getCurrentUser();
+        Account currentUser = TokenUtils.getCurrentUser();
         if (RoleEnum.USER.name().equals(currentUser.getRole())) {
             orders.setSaleId(currentUser.getId());
         }
@@ -157,4 +156,5 @@ public class OrdersService {
         }
         return dictList;
     }
+
 }
